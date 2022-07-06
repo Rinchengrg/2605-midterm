@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<SplitPane dividerPositions="0.2835703001579779" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="419.0" prefWidth="635.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.donor.donormanagement.DonorListController">
+    <items>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="417.0" prefWidth="205.0">
+            <children>
+                <ListView fx:id="donorList" layoutX="-12.0" layoutY="39.0" onMouseClicked="#showDonorDetail" prefHeight="200.0" prefWidth="200.0">
+                    <padding>
+                        <Insets left="10.0" />
+                    </padding>
+                </ListView>
+                <Button layoutX="78.0" layoutY="7.0" mnemonicParsing="false" onAction="#openNewDonorForm" prefHeight="26.0" prefWidth="92.0" text="+Add Donor" />
+            </children>
+        </AnchorPane>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="419.0" prefWidth="429.0">
+            <children>
+                <TabPane tabClosingPolicy="UNAVAILABLE">
+                    <Tab text="View Details">
+                        <content>
+                            <AnchorPane>
+                                <children>
+                                    <Label layoutX="40.0" layoutY="42.0" prefHeight="17.0" prefWidth="98.0" text="First Name:" />
+                                    <Label layoutX="40.0" layoutY="67.0" prefHeight="24.0" prefWidth="98.0" text="Last Name:" />
+                                    <Label layoutX="40.0" layoutY="199.0" prefHeight="24.0" prefWidth="98.0" text="Mobile:" />
+                                    <Label layoutX="40.0" layoutY="166.0" prefHeight="24.0" prefWidth="98.0" text="Email: " />
+                                    <Label layoutX="40.0" layoutY="130.0" prefHeight="24.0" prefWidth="98.0" text="Gender:" />
+                                    <Label layoutX="40.0" layoutY="99.0" prefHeight="24.0" prefWidth="98.0" text="Date Of Birth:" />
+                                    <Label layoutX="40.0" layoutY="271.0" prefHeight="24.0" prefWidth="98.0" text="Address:" />
+                                    <Label layoutX="40.0" layoutY="344.0" prefHeight="24.0" prefWidth="98.0" text="Notes:" />
+                                    <TextField fx:id="firstNameField" layoutX="159.0" layoutY="38.0" />
+                                    <TextField fx:id="lastNameField" layoutX="159.0" layoutY="66.0" />
+                                    <TextField fx:id="emailField" layoutX="159.0" layoutY="165.0" />
+                                    <TextField fx:id="mobileField" layoutX="159.0" layoutY="198.0" />
+                                    <TextField fx:id="notesField" layoutX="159.0" layoutY="344.0" />
+                                    <TextArea fx:id="addressField" layoutX="159.0" layoutY="271.0" prefHeight="67.0" prefWidth="200.0" />
+                                    <CheckBox fx:id="editable" layoutX="348.0" layoutY="14.0" mnemonicParsing="false" onAction="#makeEditable" text="Edit" />
+                                    <Button fx:id="submitButton" layoutX="320.0" layoutY="370.0" mnemonicParsing="false" onAction="#addUpdateDonor" text="Submit" />
+                                    <DatePicker fx:id="dateOfBirthField" layoutX="159.0" layoutY="98.0" />
+                                    <ComboBox fx:id="genderField" layoutX="159.0" layoutY="129.0" prefHeight="26.0" prefWidth="160.0" />
+                                    <ComboBox fx:id="bloodGroupField" layoutX="159.0" layoutY="236.0" prefHeight="26.0" prefWidth="160.0" />
+                                    <Label layoutX="40.0" layoutY="237.0" prefHeight="24.0" prefWidth="98.0" text="Blood Group" />
+                                </children>
+                            </AnchorPane>
+                        </content>
+
+                    </Tab>
+                    <Tab text="Donation History">
+                        <content>
+                            <AnchorPane prefHeight="396.0" prefWidth="447.0">
+                        <children>
+                           <TableView fx:id="bloodDonationTable" layoutX="-1.0" layoutY="30.0" prefHeight="290.0" prefWidth="223.0">
+                             <columns>
+                                 <TableColumn fx:id="bloodDonationType" prefWidth="107.0" text="Donation Type">
+                                     <cellValueFactory><PropertyValueFactory property="donationType" />
+                                     </cellValueFactory>
+                                 </TableColumn>
+                                 <TableColumn fx:id="bloodDonatedAt" prefWidth="110.0" text="Donated At">
+                                     <cellValueFactory><PropertyValueFactory property="donatedAt" />
+                                     </cellValueFactory>
+                                 </TableColumn>
+                             </columns>
+                           </TableView>
+                           <Label fx:id="bloodDonationCount" layoutX="1.0" layoutY="14.0" text="Blood Donations: 0 " />
+                           <Button fx:id="bloodCountIncreaseButton" layoutX="174.0" layoutY="4.0" mnemonicParsing="false" onAction="#increaseBloodCount" text="+" />
+                           <Button fx:id="bloodCountDecreaseButton" layoutX="199.0" layoutY="3.0" mnemonicParsing="false" onAction="#decreaseBloodCount" text="-" />
+                           <Label fx:id="plasmaDonationCount" layoutX="224.0" layoutY="14.0" text="Plasma Donations: 0 " />
+                           <Button fx:id="plasmaCountIncreaseButton" layoutX="391.0" layoutY="10.0" mnemonicParsing="false" onAction="#increasePlasmaCount" text="+" />
+                           <Button fx:id="plasmaCountDecreaseButton" layoutX="416.0" layoutY="10.0" mnemonicParsing="false" onAction="#decreasePlasmaCount" text="-" />
+                           <TableView fx:id="plasmaDonationTable" layoutX="224.0" layoutY="32.0" prefHeight="287.0" prefWidth="215.0">
+                             <columns>
+                                 <TableColumn fx:id="plasmaDonationType" prefWidth="115.0" text="Donation Type">
+                                     <cellValueFactory><PropertyValueFactory property="donationType" />
+                                     </cellValueFactory>
+                                 </TableColumn>
+                                 <TableColumn fx:id="plasmaDonatedAt" prefWidth="93.0" text="Donated At">
+                                     <cellValueFactory><PropertyValueFactory property="donatedAt" />
+                                     </cellValueFactory>
+                                 </TableColumn>
+                             </columns>
+                           </TableView>
+                        </children>
+                            </AnchorPane>
+                        </content>
+                    </Tab>
+                </TabPane>
+            </children>
+        </AnchorPane>
+    </items>
+</SplitPane>
